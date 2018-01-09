@@ -3,6 +3,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <functional>
+#include <algorithm>
+
 
 std::pair<std::vector<double>,std::vector<double>> reader(void)
 {
@@ -26,7 +29,30 @@ std::pair<std::vector<double>,std::vector<double>> reader(void)
     return information;
 }
 
+void sorting(std::pair<std::vector<double>,std::vector<double>> & p)
+{
+    std::sort(p.first.begin(), p.first.end());
+
+    for (auto it = p.first.begin(); it != p.first.end();)
+    {
+        auto a = it;
+	auto b = ++it;
+      
+        if (a > b)
+        {
+	    std::iter_swap(a, b);
+        }
+    }
+}
+
+bool lineSegmentSort(double x1, double y1, double x2, double y2, double x3, double y3)
+{
+    if ( ((x3 - x1)(y2 - y1) - (y3 - y1)(x2 - x1)) < 0) return false; 
+}
+
 void chapter_one(void)
 {
     auto data = reader();
+
+    sorting(data);
 }
