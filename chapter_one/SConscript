@@ -1,14 +1,16 @@
-env = Environment() # initialize the environment
+local_env = Environment() # initialize the environment
 
-env.SharedLibrary(
-    target = "chapter_one",
-    source = ["src/chapter_one.cpp"],
-    CPPPATH = ["src"])
+library = local_env.SharedLibrary(
+    target="chapter_one",
+    source=["src/chapter_one.cpp"],
+    CPPPATH=["src"])
 
-env.Program(
-    target = "chapter_one_driver",
-    source = ["src/main.cpp"],
-    CPPPATH = ["src"],
-    LIBS= ["libchapter_one.so"],
+main = local_env.Program(
+    target="chapter_one_driver",
+    source=["src/main.cpp"],
+    CPPPATH=["src"],
+    LIBS=[library],
     LIBPATH=["src"],
     RPATH=["src", "../build"])
+
+# Depends(main, library)
