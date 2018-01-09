@@ -1,0 +1,14 @@
+env = Environment() # initialize the environment
+
+env.SharedLibrary(
+    target = "chapter_one",
+    source = ["src/chapter_one.cpp"],
+    CPPPATH = ["src"])
+
+env.Program(
+    target = "chapter_one_driver",
+    source = ["src/main.cpp"],
+    CPPPATH = ["src"],
+    LIBS= ["libchapter_one.so"],
+    LIBPATH=["src"],
+    RPATH=["src", "../build"])
